@@ -7,8 +7,8 @@ RUN apt-get update && apt-get -y upgrade \
 
 WORKDIR /project
 
-COPY ./main.py /project
+COPY ./convert_mp4.py /project
 
 RUN pip3 install opencv-python
 
-CMD ["python","main.py"]
+CMD ["python","convert_mp4.py"]
