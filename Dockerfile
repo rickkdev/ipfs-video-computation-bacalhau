@@ -1,3 +1,17 @@
+# FROM python:3.11
+# COPY . /app
+# WORKDIR /app
+# RUN pip3 install pipenv
+# RUN pip3 install opencv-python
+# RUN apt-get update
+# RUN apt-get install ffmpeg libsm6 libxext6  -y
+
+# # RUN pipenv install --system --deploy --ignore-pipfile
+# ENTRYPOINT [ "python" ]
+# CMD [ "compute.py" ]
+
+
+
 FROM python:slim
 
 RUN apt-get update && apt-get -y upgrade \
@@ -7,8 +21,14 @@ RUN apt-get update && apt-get -y upgrade \
 
 WORKDIR /project
 
-COPY ./convert_mp4.py /project
-
+RUN apt-get update
+RUN apt-get install ffmpeg libsm6 libxext6  -y
+RUN pip3 install pipenv
 RUN pip3 install opencv-python
 
-CMD ["python","convert_mp4.py"]
+# COPY ./requirements.txt /project
+
+
+COPY ./main.py /project
+
+CMD ["python","main.py"]
